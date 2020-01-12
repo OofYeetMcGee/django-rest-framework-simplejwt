@@ -11,7 +11,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.settings import api_settings
 from rest_framework_simplejwt.tokens import RefreshToken
 from . import serializers
-from .authentication import AUTH_HEADER_TYPES
+from .authentication import AUTH_HEADER_TYPES, JWTAuthentication
 from .exceptions import InvalidToken, TokenError
 
 
@@ -176,6 +176,23 @@ class TokenVerifyView(TokenViewBase):
 
 
 token_verify = TokenVerifyView.as_view()
+
+
+class TokenVerifyCookieView(TokenViewBase):
+    """
+    Attempts to authenticate the user via JWTAuthentication.
+    If successful returns empty data, otherwise JWTAuthentication raises an error
+    """
+    authentication_classes = (JWTAuthentication,)
+
+    def get(self, *args, **kwargs):
+        return Response({}, status=status.HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):
+        return Response({}, status=status.HTTP_200_OK)
+
+
+token_verify_cookie = TokenVerifyCookieView.as_view()
 
 
 class TokenCookieDeleteView(APIView):
