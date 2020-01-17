@@ -45,6 +45,7 @@ DEFAULTS = {
     # Whether to set the flag restricting cookie leaks on cross-site requests.
     # This can be 'Lax', 'Strict', or None to disable the flag.
     'AUTH_COOKIE_SAMESITE': 'Lax',
+    'REFRESH_COOKIE_SAMESITE': 'Strict',
 }
 
 IMPORT_STRINGS = (
