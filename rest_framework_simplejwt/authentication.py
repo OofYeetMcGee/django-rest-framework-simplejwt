@@ -18,17 +18,17 @@ AUTH_HEADER_TYPE_BYTES = set(
 )
 
 
-def enforce_csrf(request):
-    """
-    Enforce CSRF validation.
-    """
-    check = CSRFCheck()
-    # populates request.META['CSRF_COOKIE'], which is used in process_view()
-    check.process_request(request)
-    reason = check.process_view(request, None, (), {})
-    if reason:
-        # CSRF failed, bail with explicit error message
-        raise exceptions.PermissionDenied('CSRF Failed: %s' % reason)
+# def enforce_csrf(request):
+#     """
+#     Enforce CSRF validation.
+#     """
+#     check = CSRFCheck()
+#     # populates request.META['CSRF_COOKIE'], which is used in process_view()
+#     check.process_request(request)
+#     reason = check.process_view(request, None, (), {})
+#     if reason:
+#         # CSRF failed, bail with explicit error message
+#         raise exceptions.PermissionDenied('CSRF Failed: %s' % reason)
 
 
 class JWTAuthentication(authentication.BaseAuthentication):
@@ -56,8 +56,8 @@ class JWTAuthentication(authentication.BaseAuthentication):
         if not user or not user.is_active:
             return None
 
-        if api_settings.AUTH_COOKIE:
-            enforce_csrf(request)
+        # if api_settings.AUTH_COOKIE:
+        #         #     enforce_csrf(request)
 
         return user, validated_token
 

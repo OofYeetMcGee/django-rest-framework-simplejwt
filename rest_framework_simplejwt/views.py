@@ -40,7 +40,7 @@ class TokenViewBase(generics.GenericAPIView):
         response = Response(serializer.validated_data, status=status.HTTP_200_OK)
 
         if api_settings.AUTH_COOKIE:
-            csrf.get_token(self.request)
+            # csrf.get_token(self.request)
             response = self.set_auth_cookies(response, serializer.validated_data)
 
         return response
