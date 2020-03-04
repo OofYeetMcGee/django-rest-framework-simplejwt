@@ -77,7 +77,7 @@ class TokenCookieViewMixin:
             path=api_settings.AUTH_COOKIE_PATH,
             secure=api_settings.AUTH_COOKIE_SECURE or None,
             httponly=True,
-            samesite=api_settings.AUTH_COOKIE_SAMESITE,
+            samesite='None',  # samesite=api_settings.AUTH_COOKIE_SAMESITE,
         )
         if 'refresh' in data:
             response.set_cookie(
@@ -87,7 +87,7 @@ class TokenCookieViewMixin:
                 path=reverse('token_refresh'),
                 secure=api_settings.AUTH_COOKIE_SECURE or None,
                 httponly=True,
-                samesite=api_settings.REFRESH_COOKIE_SAMESITE,
+                samesite='None',  # samesite=api_settings.REFRESH_COOKIE_SAMESITE,
             )
         return response
 
